@@ -27,10 +27,15 @@ class Person(object):
 		self.age = age
 		self.gender =  gender
 
-
-c = Person("clara", "18", "Jerusalem", "girl")
-
 	def eat(self,food):
 		print(self.name + " eats " + food)
 
+	def hobbie(self,hobbie):
+		print(self.name + " loves to " + hobbie)
+
+
+c = Person("clara", "18", "Jerusalem", "girl")
+
+
 c.eat("Hamin")
+c.hobbie("drawing")
