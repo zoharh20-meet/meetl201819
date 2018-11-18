@@ -39,12 +39,14 @@
 # prints the object as "Jefferson, Thomas".
 
 #class Person(object):
+'''
   def __int__(self, first_name, last_name):
     self.first_name = first_name
     self.last_name = last_name
 
   def speak(self):
   	print("My name is " + self.first_name + " " + self.last_name)
+  	'''
 
 #me = Person("Brandon", "Walsh")
 #you = Person("Ethan", "Reed")
@@ -80,30 +82,30 @@ from tkinter import simpledialog
 # Average: 33
 # Grade: F
 # Student iis failing.
-
+'''
 exam_one = int(simpledialog.askstring("Input", "Input exam grade one: ", parent=tk.Tk().withdraw()))
 
-exam_two = int(simpledialog.askstring("Input exam grade two: " , parent=tk.Tk().withdraw()))
+exam_two = int(simpledialog.askstring("Input"," exam grade two: " , parent=tk.Tk().withdraw()))
 
-exam_3 = int(simpledialog.askstring("Input exam grade three: ", parent=tk.Tk().withdraw()))
+exam_3 = int(simpledialog.askstring("Input", "exam grade three: ", parent=tk.Tk().withdraw()))
 
-grades = [exam_one exam_two exam_three]
+grades = [exam_one, exam_two, exam_3]
 sum = 0
-	for grade in grade:
-  		sum = sum + grade
+for grade in grades:
+  sum = sum + grade
 
 avg = sum / len(grades)
 
-	if avg >= 90:
-    	letter_grade = "A"
-	elif avg >= 80 and avg < 90
-    	letter_grade = "B"
-	elif avg > 69 and avg < 80:
-    	letter_grade = "C"
-	elif avg <= 69 and avg >= 65:
-   		 letter_grade = "D"
-	else: 
-		letter_grade = "F"
+if avg >= 90:
+    letter_grade = "A"
+elif avg >= 80 and avg < 90:
+    letter_grade = "B"
+elif avg > 69 and avg < 80:
+    letter_grade = "C"
+elif avg <= 69 and avg >= 65:
+   	 letter_grade = "D"
+elif avg <= 64: 
+	letter_grade = "F"
 
 for grade in grades:
     print("Exam: " + str(grade))
@@ -112,7 +114,102 @@ for grade in grades:
 
     print("Grade: " + letter_grade)
 
-if letter-grade is "F":
+if letter_grade is "F":
     print ("Student is failing.")
 else:
     print ("Student is passing.")
+
+'''
+#problem 5
+'''
+
+class Person():
+   def __init__(self, name, favorite_food, Chocolate ,age, color):
+       self.name = name
+       self.fav_food = favorite_food
+       self.age = age
+       self.color = color
+
+
+
+   def define_color(self, color):
+       self.color = color
+
+   def print_info(self):
+       print("My name is " + self.name + ", I'm " + str(self.age) + " years old.")
+       print("My favorite food is " + self.fav_food + " and my favorite color is " + self.color)
+
+
+a = Person("Britney", "Pizza", "white", 16, "blue")
+a.define_color("Black")
+a.print_info()
+
+b = Person("Jake", "omlet" , "dark" , 15 ,"orange")
+b.print_info()
+
+'''
+#problem 6
+'''
+class Bear(object):
+	def __init__(self, name):
+		self.name = name
+	def create(self):	
+		print("A new bear created. Its name is: " + self.name)
+	
+	def say_hi(self):
+		print("Hi! I’m a bear. My name is " + self.name)
+my_bear = Bear("Danny")
+print(my_bear.say_hi())
+
+'''
+#problem 7
+'''
+class Story(object):
+	def __init__(self, n_balloons, name, color):
+		self.n_balloons = n_balloons
+		self.name = name
+		self.color = color
+
+	def tell(self):
+		print("This is a tale about " + self.n_balloons + " balloons. The first kid is " + self.name + " who got a " + self.color + "balloon" )
+
+my_story = Story("5", "Ron", "Yellow")
+print(my_story.tell())
+'''
+#Problem 8
+'''
+
+class Cake(object):
+	def __init__(self, flavor):
+		self.flavor = flavor
+
+	def eat(self):
+		print("Yummy!!! Eating a " + self.flavor + " cake" )
+
+cake = Cake("chocolate")
+print(cake.eat())
+# what I want to be printed: Yummy!!! Eating a chocolate cake :)
+
+'''
+#Problem 9
+'''
+
+class Cat(object):
+	def __init__(self, name, age):
+		self.name = name
+		self.age = age
+
+	def birthday(self):
+		self.age += 1
+		if self.age >= 100:
+			print("Dong dong, the cat is dead!")
+		else:
+			print(self.name + "hasing its " + str(self.age) +" birthday!")
+
+my_cat = Cat("Salem", 7)
+print (my_cat.birthday())
+# what I want: my cat to celebrate its 8th birthday (and all the 
+# birthdays that come before that)
+
+
+'''	
