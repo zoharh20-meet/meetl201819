@@ -204,12 +204,12 @@ class Cat(object):
 		if self.age >= 100:
 			print("Dong dong, the cat is dead!")
 		else:
-			print(self.name + "hasing its " + str(self.age) +" birthday!")
+			print(self.name + " 
+			hasing its " + str(self.age) +" birthday!")
 
 my_cat = Cat("Salem", 7)
 print (my_cat.birthday())
 # what I want: my cat to celebrate its 8th birthday (and all the 
 # birthdays that come before that)
 
-
-'''	
+'''
