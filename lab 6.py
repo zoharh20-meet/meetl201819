@@ -25,28 +25,28 @@ turtle.mainloop()
 '''
 #Exercise 2
  
-	from turtle import Turtle 
-	import turtle 
-	from turtle import *
-	import turtle 
+from turtle import Turtle 
+import turtle 
 
-	class Hexagon(Turtle):
- 		def __init__(self, size):
- 			Turtle.__init__(self)
- 			self.size = size
- 			turtle.penup()
 
-			turtle.begin_poly()
- 			for i in range(6):
+class Hexagon(Turtle):
+ 	def __init__(self, size, hcolor):
+ 		Turtle.__init__(self)
+ 		self.size = size
+ 		self.hcolor = hcolor
+ 		turtle.penup()
+ 
+ 		turtle.begin_poly()
+ 		for i in range(6):
  			turtle.forward(100)
  			turtle.right(60)
- 			turtle.end_poly()
+ 		turtle.end_poly()
 
- 			s = turtle.get_poly()
- 			register_shape("Hexagon", s)
- 			self.shape("Hexagon")
- 		#self.shapesize(self.size)
-
-h1 = Hexagon(50)
+ 		s = turtle.get_poly()
+ 		turtle.register_shape("Hexagon", s)
+ 		self.shape("Hexagon")
+ 		self.shapesize(self.size)
+ 		self.color(self.hcolor)
+h1 = Hexagon(2 ,"pink")
 
 turtle.mainloop()
