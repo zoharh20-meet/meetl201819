@@ -19,6 +19,7 @@ class Ball(Turtle):
 		self.showturtle()
 		self.dx = dx
 		self.dy = dy
+		
 	def move(self,height,width):
 		newx = self.xcor()+self.dx
 		newy = self.ycor()+self.dy
