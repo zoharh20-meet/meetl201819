@@ -13,12 +13,12 @@ SLEEP = 0.0077
 
 #definding the edges of the screen
 SCREEN_WIDTH = turtle.getcanvas().winfo_width()/2
-SCREEN_HEIGHT = turtle.getcanvas().winfo_width()/2
+SCREEN_HEIGHT = turtle.getcanvas().winfo_height()/2
 
 
 my_ball = Ball(100,100,20,20,50,"pink")
 
-NUMBER_OF_BALLS = 5
+NUMBER_OF_BALLS = 1
 MINIMUM_BALL_RADIUS = 10
 MAXIMUM_BALL_RADIUS = 100
 MINIMUM_BALL_DX = -5
@@ -38,12 +38,13 @@ for i in range(NUMBER_OF_BALLS):
 	r = random.randint(MINIMUM_BALL_RADIUS, MAXIMUM_BALL_RADIUS)
 	color = (random.random(), random.random(), random.random())
 
-new_ball = Ball(x, dx, y, dy, r, color)
-BALLS.append(new_ball)
+	new_ball = Ball(x, dx, y, dy, r, color)
+	BALLS.append(new_ball)
 
 #move all balls:
-for ball in BALLS:
-	ball.move(SCREEN_WIDTH, SCREEN_HEIGHT)
+def move_all_balls():
+	for ball in BALLS:
+		ball.move(SCREEN_WIDTH, SCREEN_HEIGHT)
 
 #cheks for ball colilisions
 def colide(ball_a, ball_b):
@@ -57,7 +58,8 @@ def colide(ball_a, ball_b):
 	else:
 		return False
 
-#cheks collisions betwen any 2 balls
+
+#cheks collisions between any 2 balls
 def all_balls_collision():
 	for ball1 in BALLS:
 		for ball2 in BALLS:
@@ -72,7 +74,7 @@ def all_balls_collision():
 					dx = random.randint(MINIMUM_BALL_DX, MAXIMUM_BALL_DX)
 				dy = 0
 				while dy ==  0:
-					dy = random.randint(MINIMUM_BALL_DX, MAXIMUM_BALL_DX)
+					dy = random.randint(MINIMUM_BALL_DY, MAXIMUM_BALL_DY)
 
 				r = random.randint(MINIMUM_BALL_RADIUS, MAXIMUM_BALL_RADIUS)
 				color = (random.random(), random.random(), random.random())
@@ -109,8 +111,57 @@ def all_balls_collision():
 def myball_collision():
 	for ball in BALLS:
 		if colide(my_ball,ball):
+			#saves radius:
 			my_ball.r = my_r
 			ball.r = ball_r
+
+			if my_r < ball_r:
+				return False
+			#updates the characteristics of the smaller ball:
+			else:
+				my_ball.r += 10
+				my_ball.shapesize(my_ball.r/10)
+				my_ball.dx = dx
+				my_ball.dy = dy
+				my_ball.x = x
+				my_ball.y = y
+				my_ball.color = color
+
+				ball.shapesize(r/10)
+				ball.r = r
+				ball.penup()
+				ball.goto(x,y)
+				ball.x = x
+				ball.y = y
+				ball.dx = dx
+				ball.dy = dy
+				ball.color(color)
+				ball.shape("circle")
+	return True
+
+
+#this function makes cool things to happen when you move the mouse 
+def move_around(event):  
+	x = event.x - SCREEN_WIDTH
+	y = SCREEN_HEIGHT -event.y
+	my_ball.goto(x,y)
+turtle.getcanvas().bind("<Motion>", move_around)
+turtle.listen()
+
+#while loop that will run as long as the game is running and MY_BALL didn’t lose:
+while RUNNING is True:
+	SCREEN_HEIGHT = turtle.getcanvas().winfo_height()/2
+	SCREEN_WIDTH = turtle.getcanvas().winfo_width()/2
+
+	move_all_balls()
+	all_balls_collision()
+
+
+	
+
+
+
+
 
 
 
