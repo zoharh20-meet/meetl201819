@@ -2,8 +2,9 @@ import turtle
 from turtle import *
 import time
 import random
+import math
 from ball import Ball
-turtle.tracer(1)
+turtle.tracer(0,0)
 turtle.hideturtle()
 
 global RUNNING, SLEEP, SCREEN_WIDTH, SCREEN_HEIGHT
@@ -18,7 +19,7 @@ SCREEN_HEIGHT = turtle.getcanvas().winfo_height()/2
 
 my_ball = Ball(100,100,20,20,50,"pink")
 
-NUMBER_OF_BALLS = 1
+NUMBER_OF_BALLS = 4
 MINIMUM_BALL_RADIUS = 10
 MAXIMUM_BALL_RADIUS = 100
 MINIMUM_BALL_DX = -5
@@ -38,7 +39,7 @@ for i in range(NUMBER_OF_BALLS):
 	r = random.randint(MINIMUM_BALL_RADIUS, MAXIMUM_BALL_RADIUS)
 	color = (random.random(), random.random(), random.random())
 
-	new_ball = Ball(x, dx, y, dy, r, color)
+	new_ball = Ball(x, y, dx, dy, r, color)
 	BALLS.append(new_ball)
 
 #move all balls:
@@ -47,19 +48,17 @@ def move_all_balls():
 		ball.move(SCREEN_WIDTH, SCREEN_HEIGHT)
 
 #cheks for ball colilisions
-def colide(ball_a, ball_b):
-	if ball_a == ball_b:
+def colide(ball1, ball2):
+	if ball1 == ball2:
 		return False
 	#distance between the 2 balls
 	D = math.sqrt(math.pow((ball2.xcor()-ball1.xcor()),2) + math.pow((ball2.ycor()-ball1.ycor()),2))
 	
-	if  D+10 <= ball1.r + ball.r:
+	if  D+10 <= ball1.r + ball2.r:
 		return True 
 	else:
 		return False
 
-
-#cheks collisions between any 2 balls
 def all_balls_collision():
 	for ball1 in BALLS:
 		for ball2 in BALLS:
@@ -78,14 +77,13 @@ def all_balls_collision():
 
 				r = random.randint(MINIMUM_BALL_RADIUS, MAXIMUM_BALL_RADIUS)
 				color = (random.random(), random.random(), random.random())
-				new_ball = Ball(x, dx, y, dy, r, color)
-
-				ball1.r = r1
-				ball2.r = r2
+				
+				r1 = ball1.r 
+				r2 = ball2.r 
 
 				#Determine which ball is smaller\bigger + accordingly generate values to ball atributes
 				if r1>r2 :
-					r1 += 10
+					r1 += 1
 					ball1.r = r1
 					ball1.shapesize(r1/10)
 					ball2.goto(x,y)
@@ -97,7 +95,7 @@ def all_balls_collision():
 
 				#Determine which ball is smaller\bigger + accordingly generate values to ball atributes
 				if r2>r1 :
-					r2 += 10
+					r2 += 1
 					ball2.r = r2
 					ball2.shapesize(r2/10)
 					ball1.goto(x,y)
@@ -109,34 +107,44 @@ def all_balls_collision():
 
 #detect whether a collision happened between my_ball and another ball:
 def myball_collision():
+
 	for ball in BALLS:
 		if colide(my_ball,ball):
+			x = random.randint(-SCREEN_WIDTH + MAXIMUM_BALL_RADIUS, SCREEN_WIDTH - MAXIMUM_BALL_RADIUS)
+			dx = random.randint( MINIMUM_BALL_DX, MAXIMUM_BALL_DX)
+			y = random.randint(-SCREEN_HEIGHT + MAXIMUM_BALL_RADIUS, SCREEN_HEIGHT - MAXIMUM_BALL_RADIUS)
+			dy = random.randint(MINIMUM_BALL_DX, MAXIMUM_BALL_DX)
+			r = random.randint(MINIMUM_BALL_RADIUS, MAXIMUM_BALL_RADIUS)
+			color = (random.random(), random.random(), random.random())
 			#saves radius:
-			my_ball.r = my_r
-			ball.r = ball_r
+			my_r = my_ball.r 
+			ball_r = ball.r  
 
 			if my_r < ball_r:
 				return False
+
 			#updates the characteristics of the smaller ball:
 			else:
-				my_ball.r += 10
-				my_ball.shapesize(my_ball.r/10)
-				my_ball.dx = dx
-				my_ball.dy = dy
-				my_ball.x = x
-				my_ball.y = y
-				my_ball.color = color
+
+				if my_ball.r > MAXIMUM_BALL_RADIUS:
+					my_r -=1
+
+				my_ball.r = my_r +1 
+				my_ball.shapesize(my_ball.r/10) 
+				
+
+				
 
 				ball.shapesize(r/10)
 				ball.r = r
-				ball.penup()
+			
 				ball.goto(x,y)
 				ball.x = x
 				ball.y = y
 				ball.dx = dx
 				ball.dy = dy
 				ball.color(color)
-				ball.shape("circle")
+			
 	return True
 
 
@@ -155,7 +163,10 @@ while RUNNING is True:
 
 	move_all_balls()
 	all_balls_collision()
+	RUNNING = myball_collision()
 
+	turtle.update()
+	time.sleep(SLEEP)
 
 	
 

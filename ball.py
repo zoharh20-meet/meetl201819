@@ -26,10 +26,10 @@ class Ball(Turtle):
 		self.goto(new_x,new_y)
 			
 
-		if (up_side_ball >= screen_height/2) or (down_side_ball >= -screen_height/2):
+		if (up_side_ball >= screen_height) or (down_side_ball <= -screen_height):
 			self.dy = -self.dy
 
-		elif (right_side_ball >= screen_width/2) or (left_side_ball >= -screen_width/2):
+		elif (right_side_ball >= screen_width) or (left_side_ball <= -screen_width):
 			self.dx = -self.dx
 
 
