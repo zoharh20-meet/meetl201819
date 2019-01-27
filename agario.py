@@ -25,9 +25,9 @@ turtle.bgpic("whitebackground.gif")
 my_ball = Ball(100,100,20,20,50,"pink")
 my_ball.shape("dounut.gif")
 
-NUMBER_OF_BALLS = 5
+NUMBER_OF_BALLS = 7
 MINIMUM_BALL_RADIUS = 10
-MAXIMUM_BALL_RADIUS = 60
+MAXIMUM_BALL_RADIUS = 70
 MINIMUM_BALL_DX = -3
 MAXIMUM_BALL_DX = 3
 MINIMUM_BALL_DY = -3
@@ -52,7 +52,7 @@ for i in range(NUMBER_OF_BALLS):
 #move all balls:
 def move_all_balls():
 	for ball in BALLS:
-		ball.move(SCREEN_WIDTH, SCREEN_HEIGHT)
+		ball.move(SCREEN_WIDTH,SCREEN_HEIGHT)
 
 #cheks for ball colilisions
 def colide(ball1, ball2):
