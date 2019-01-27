@@ -10,22 +10,29 @@ turtle.hideturtle()
 global RUNNING, SLEEP, SCREEN_WIDTH, SCREEN_HEIGHT
 
 RUNNING = True 
-SLEEP = 0.0077
+SLEEP = 0.007
 
 #definding the edges of the screen
 SCREEN_WIDTH = turtle.getcanvas().winfo_width()/2
 SCREEN_HEIGHT = turtle.getcanvas().winfo_height()/2
 
+#changes background pic and tmy_ball shape
+screen = turtle.Screen()
+screen.addshape("dounut.gif")
+turtle.bgpic("whitebackground.gif")
 
+#creating my ball
 my_ball = Ball(100,100,20,20,50,"pink")
+my_ball.shape("dounut.gif")
 
-NUMBER_OF_BALLS = 4
+NUMBER_OF_BALLS = 5
 MINIMUM_BALL_RADIUS = 10
-MAXIMUM_BALL_RADIUS = 100
-MINIMUM_BALL_DX = -5
-MAXIMUM_BALL_DX = 5
-MINIMUM_BALL_DY = -5
-MAXIMUM_BALL_DY = 5
+MAXIMUM_BALL_RADIUS = 60
+MINIMUM_BALL_DX = -3
+MAXIMUM_BALL_DX = 3
+MINIMUM_BALL_DY = -3
+MAXIMUM_BALL_DY = 3
+
 
 #creating a list of balls
 BALLS=[]
